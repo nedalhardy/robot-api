@@ -17,9 +17,10 @@ public class TokenAuthenticationService {
 	static final String TOKEN_PREFIX = "Bearer";
 	static final String HEADER_STRING = "Authorization";
 
-	static void addAuthentication(HttpServletResponse res, String username) {
+	static String addAuthentication(HttpServletResponse res, String username) {
 		String JWT = generateAuthentication(username);
 		res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
+		return JWT;
 	}
 
 	public static String generateAuthentication(String username) {

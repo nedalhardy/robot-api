@@ -2,6 +2,7 @@ package test.example.demo.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,9 +36,12 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	@Override
 	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
-		TokenAuthenticationService.addAuthentication(res, auth.getName());
+		String jwt = TokenAuthenticationService.addAuthentication(res, auth.getName());
 		res.setContentType("application/json");
-		String json = new Gson().toJson(auth.getPrincipal());
+		Gson gson = new Gson();
+		JsonElement jsonElement = gson.toJsonTree(auth.getPrincipal());
+		jsonElement.getAsJsonObject().addProperty("jwt", jwt);
+		String json = gson.toJson(jsonElement);
 		res.getWriter().print(json);
 		res.getWriter().flush();
 	}
