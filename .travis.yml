@@ -1,0 +1,14 @@
+language: java
+jdk: oraclejdk8
+cache:
+  directories:
+  - "$HOME/.m2"
+install:
+- mvn -N io.takari:maven:wrapper -Dmaven=${MAVEN_VERSION}
+- "./mvnw --show-version --errors --batch-mode test-compile dependency:go-offline"
+script: "./mvnw --show-version --errors --batch-mode -Prun-its clean verify"
+deploy:
+  provider: heroku
+  api_key:
+    secure: Xol6iF6RXQ+hgis5eTX56GA9cJUVdR18dQLILhAV0DOt5x9n8MPQeN6hq8X3UNlpSpT1Ei9/bBlvFR42uk3LKDSZD9RVC7XucEpuKPJdcnnfA7XAl8T7YGQGI9YGa4na6qKaYCwPEOh9h7wRK/aES8wbQ8tHw+dcP/kWC6MSCFff9AdVf9YRvhUEagG7PnGsUPOT86LFuDlCq+sGQXPQZ40OylnTPSHSbE2sx0Ue7ulMuCU9AbasyACaRyBXUR8DuFSy41qeTa2MOd3EPCFrc5sOolVhxdK1Jx20oHRxQoYXqk1WiBCd7/E0DDny12stCquJraGZrqmf76dC9KusWBPU5xhTs7DZWXT0PvCLbI577mW+xE/N5unuNZKQpb1M0+Hbp43Clq7Wy3t3Z6MykSfM8/EKtFSWuiCkA1y53ummT8PuQOM3pJKjN9WYhOmRiJ7gULbDxDc5Cz6XlL2rWu8TgqCAUIYWzBblVaLUVulzg7oUjoRVALu4hW2jfAK+O5+PlWi3k5/3S9PfPFxXwfm7FyAYCA46/dOkLO+e+d6ZkUumlNZt2g+mrTf61rQ8E9Ti0FwgOlILkW03KbYBhHfetg8wPDmOCKrirM7Qkb3GLNQULbWt8VNaO/j203RaJg9wyt6jSilQ0/i5Z9ec3Tqdzco9SGZBKln6MeFfLgg=
+  app: robot-api1
