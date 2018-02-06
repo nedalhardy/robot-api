@@ -1,0 +1,60 @@
+public class Main {
+
+    public static void main(String[] args) {
+        Point py = new Point(0, 10);
+        Point pMid = new Point(3, 5);
+        Point pym = new Point(6, 10);
+        Point py0 = new Point(6, 0);
+        Point pInit = new Point(0, 0);
+        for (float x = 0; x <= pMid.getX(); x += 0.5) {
+            float m = -py.getY() / (pMid.getX() * 2);
+            float p = py.getY();
+            float y = m * x + p;
+            if (y <= pMid.getY()) {
+                System.out.println("x : " + x + ", y :" + y);
+                break;
+            }
+            System.out.println("x : " + x + ", y :" + y);
+        }
+
+        System.out.println("----------------------");
+
+        for (float x = pym.getX(); x >= pMid.getX(); x -= 0.5) {
+            float m = pym.getY() / pym.getX();
+            float p = 0;
+            float y = m * x + p;
+            if (y <= pMid.getY()) {
+                System.out.println("x : " + x + ", y :" + y);
+                break;
+            }
+            System.out.println("x : " + x + ", y :" + y);
+        }
+        System.out.println("----------------------");
+
+
+        for (float x = py0.getX(); x >= pMid.getX(); x -= 0.5) {
+            float m = -py.getY() / (pMid.getX() * 2);
+            float p = py.getY();
+            float y = m * x + p;
+            if (y >= pMid.getY()) {
+                System.out.println("x : " + x + ", y :" + y);
+                break;
+            }
+            System.out.println("x : " + x + ", y :" + y);
+        }
+
+        System.out.println("----------------------");
+
+
+        for (float x = 0; x <= pMid.getX(); x += 0.5) {
+            float m = pym.getY() / pym.getX();
+            float p = 0;
+            float y = m * x + p;
+            if (y >= pMid.getY()) {
+                System.out.println("x : " + x + ", y :" + y);
+                break;
+            }
+            System.out.println("x : " + x + ", y :" + y);
+        }
+    }
+}
